@@ -1,0 +1,73 @@
+@import "vars"
+@import "mixins"
+
+footer
+  background-color: $dred
+
+  .follow
+    text-align: center
+    color: $white
+    padding: calc(24px + (111 - 24) * ((100vw - 320px) / (1600 - 320))) 0
+
+    ul > li
+      display: flex
+      justify-content: center
+      align-items: center
+      margin: 0 0.5em
+      width: 35px
+      height: 35px
+      border-radius: 18px
+      border: 2px solid #ffffff
+
+      i
+        color: $white
+
+      &:hover
+        transform: scale(1.1)
+        transition: .2s
+        box-shadow: 0 0 1em $white
+
+    hr
+      margin: 1.5em auto
+      width: 50px
+      height: 2px
+      background-color: $white
+
+    p
+      font-family: "Roboto Slab", sans-serif
+      font-weight: 400
+      font-size: calc(10px + (12 - 10) * ((100vw - 320px) / (1600 - 320)))
+
+#scrollTop
+  position: fixed
+  bottom: 50px
+  right: 50px
+  width: 50px
+  height: 50px
+  border-radius: 50%
+  background-color: rgba(#c0301c, 0.8)
+  box-shadow: 0 0 8px white, inset 0 0 2px white
+  opacity: 0
+  transition: all 1s ease
+  cursor: pointer
+
+  &:hover
+    background-color: #c0301c
+
+  &:before,
+  &:after
+    content: ""
+    position: absolute
+    top: 40%
+    width: 20px
+    height: 5px
+    background-color: white
+    border-radius: 2.5px
+
+  &:before
+    transform: rotate(45deg)
+    left: 40.5%
+
+  &:after
+    transform: rotate(-45deg)
+    right: 40.5%

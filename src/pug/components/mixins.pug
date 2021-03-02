@@ -1,0 +1,19 @@
+mixin image(data)
+    figure.slider_item
+        img(src=`img/${data.srcName}.png` alt=`${data.srcName}`)
+        figcaption
+            ul
+                li
+                    a(href='#')
+                        i.fab.fa-facebook-f
+                li
+                    a(href='#')
+                        i.fab.fa-twitter
+                li
+                    a(href='#')
+                        i.fab.fa-google-plus-g
+                li
+                    a(href='#')
+                        i.fab.fa-linkedin-in
+            h5= `${data.title}`
+            P= `${data.caption}`

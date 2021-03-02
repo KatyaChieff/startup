@@ -1,0 +1,25 @@
+header
+    .navigation
+        a.header_logo(href=`/`)
+            p Startup
+        .screen_icon
+            span
+        nav.header_menu
+            ul.top_nav
+                each name in [[`#`, `Home`], [`#services`, `Services`], [`#about`, `About`], [`#works`, `Works`], [`#blog`, `Blog`], [`#clients`, `Clients`], [`#jsContactForm`, `Contact`]]
+                    li
+                        a(href= name[0])= name[1]
+    .popup_body
+        .popup_content
+            a.popup_close(href="#") ╳
+            form.contact_form
+                input(type='name' placeholder='YOUR NAME' required)
+                input#jsPhonePopup(type='phone' placeholder='PHONE NUMBER' required)
+                input.button(type="submit" value="REQUEST A CALL")
+                P
+                    span *
+                    |  We`ll contact you as as possible. We don`t reply on monday.
+    .welcome
+        h1 WELCOME TO STARTUP
+        p Your Favourite Creative Agency Template
+        a.button.popup_link(href='#') GET STARTED

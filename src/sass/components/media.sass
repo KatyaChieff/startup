@@ -1,0 +1,179 @@
+@import "vars"
+@import "mixins"
+
+@media (min-width: 1026px)
+
+  header
+    height: 100vh
+
+@media screen and (max-width: 925px)
+
+  main
+
+    .slider > figure
+      flex: 0 0 33.3%
+
+    #clients
+      .media
+        .full_media
+          display: none
+
+        .active_media
+          display: block
+
+    .contact_form
+
+      input
+        width: 100%
+
+      input[type='name'],
+      input[type='phone']
+        margin-right: 0
+
+      p
+        padding: 0
+        font-size: 10px
+
+@media screen and (max-width: 768px)
+
+  header
+    .navigation
+      align-items: baseline
+
+      .screen_icon
+        display: flex
+        position: relative
+        width: 35px
+        height: 20px
+        z-index: 150
+
+        span
+          position: absolute
+          left: 0
+          top: 8px
+          width: 100%
+          height: 3px
+          background-color: #fff
+          transition: .3s
+
+        &:before,
+        &:after
+          content: ''
+          background-color: #fff
+          position: absolute
+          width: 100%
+          height: 3px
+          left: 0
+          transition: .3s
+
+        &:before
+          top: 0
+
+        &:after
+          bottom: 0
+
+        &.responsive
+          position: fixed
+          margin-left: 52%
+
+          span
+            transform: scale(0)
+
+          &:before
+            transform: rotate(45deg)
+            top: 8px
+
+          &:after
+            transform: rotate(-45deg)
+            bottom: 8px
+
+      .header_menu
+        position: fixed
+        padding: 70px 10px 20px 10px
+        left: 0
+        top: 0
+        width: 100%
+        background: linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.45)), url("../../img/home.png") no-repeat center (top / cover)
+        overflow: auto
+        transform: translateY(-100%)
+        transition: .5s
+        z-index: 120
+
+        &.responsive
+          transform: translateY(0)
+        .top_nav
+          display: block
+          max-height: 80vh
+          text-align: center
+
+          li
+            margin: 0 0 20px 0
+
+            a
+              font-size: 24px
+
+    .welcome.responsive
+      opacity: 0
+      transition: .5s
+
+  main
+
+    .offer
+      flex-wrap: wrap
+
+    .about_us_text
+      flex-wrap: wrap
+      text-align: center
+
+    .slider > figure
+      flex: 0 0 50%
+
+    .blog_posts > figure > img
+      float: none
+      padding: 0 0 .5em 0
+
+    .media
+      flex-wrap: wrap
+
+    .get_in_touch
+      display: block
+
+      .adress
+        margin: 2em 0
+
+        div
+          justify-content: center
+
+        p
+          width: auto
+          text-align: center
+
+@media screen and (max-width: 720px)
+
+  main
+
+    .jobs
+
+      .jobs_pic
+        flex: 0 0 50%
+
+@media screen and (max-width: 560px)
+  .popup_body
+    width: 300px
+
+  .popup_content
+    padding: 40px 10px
+
+  main
+    .slider > figure
+      flex: 0 0 100%
+
+    .latest_works
+      ul
+        justify-content: flex-start
+        overflow-x: scroll
+
+    .jobs
+
+      .jobs_pic
+        flex: 0 0 100%

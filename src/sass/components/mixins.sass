@@ -1,0 +1,15 @@
+@mixin button($white)
+  display: block
+  width: 170px
+  margin: 0 auto
+  padding: 0.5em 1em
+  border: 2px solid $white
+  font-size: 14px
+  line-height: 24px
+  text-align: center
+  text-transform: uppercase
+
+  &:hover
+    transform: scale(1.1)
+    transition: .2s
+    box-shadow: 0 0 1em $white
