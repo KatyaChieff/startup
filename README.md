@@ -2,7 +2,7 @@
 #### responsive landing page
 ---
 
-* Using
+## Using
 + Gulp
 + Pug
 + SASS
