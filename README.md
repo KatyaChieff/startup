@@ -1,8 +1,8 @@
 # Startup
-####responsive landing page
+#### responsive landing page
 ---
 
-*Using
+* Using
 + Gulp
 + Pug
 + SASS
