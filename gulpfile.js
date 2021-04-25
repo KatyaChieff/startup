@@ -103,6 +103,17 @@ gulp.task("fonts", function () {
         }))
 })
 
+gulp.task("php", function () {
+    return gulp
+        .src([
+            "src/php/**/*.*"
+        ])
+        .pipe(gulp.dest("dist/php"))
+        .pipe(browserSync.reload({
+            stream: true
+        }))
+})
+
 gulp.task("images", function () {
     return gulp
         .src([
@@ -123,6 +134,7 @@ gulp.task("watch", function () {
     gulp.watch("src/pug/**/*.pug", gulp.parallel("html"))
     gulp.watch("src/*.*", gulp.parallel("files"))
     gulp.watch("src/fonts/**/*.*", gulp.parallel("fonts"))
+    gulp.watch("src/php/**/*.*", gulp.parallel("php"))
     gulp.watch("src/img/**/*.*", gulp.parallel("images"))
 })
 
@@ -130,7 +142,7 @@ gulp.task("clear", function () {
     return cache.clearAll()
 })
 
-gulp.task("default", gulp.parallel("watch", "html", "sass", "js", "files", "fonts", "images", "browser-sync"))
+gulp.task("default", gulp.parallel("watch", "html", "sass", "js", "files", "fonts", "php", "images", "browser-sync"))
 
 gulp.task("removeDist", function () {
     return del("dist")

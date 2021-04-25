@@ -57,17 +57,20 @@
       border: 2px solid #dddddd
       border-radius: 45px
 
-      a > i:not(.fa-font)
+      &:hover
+        background-color: $dred
+        cursor: pointer
+        transition: 300ms
+
+      &:hover a
+        color: $white
+        background-color: $dred
+        transition: 300ms
+
+      a
         font-size: 45px
         color: $dred
         background-color: $white
-
-    .typography
-      background-color: $dred
-
-      a > i
-        font-size: 45px
-        color: $white
 
     h6
       padding: calc(14px + (20 - 14) * ((100vw - 320px) / (1600 - 320)))
@@ -123,8 +126,8 @@
     img
       object-fit: cover
       object-position: top
-      width: 232px
-      height: 221px
+      //width: 232px
+      //height: 221px
       max-width: 100%
 
     figcaption
@@ -396,7 +399,7 @@ summary
   color: $dred
   cursor: pointer
 
-summary::-webkit-details-marker
+summary::marker
   display: none
 
 #clients

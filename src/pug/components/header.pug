@@ -13,12 +13,29 @@ header
         .popup_content
             a.popup_close(href="#") ╳
             form.contact_form
-                input(type='name' placeholder='YOUR NAME' required)
-                input#jsPhonePopup(type='phone' placeholder='PHONE NUMBER' required)
-                input.button(type="submit" value="REQUEST A CALL")
+                input#jsNamePopup(type='text' placeholder='YOUR NAME' required)
+                input#jsPhonePopup(type='password' placeholder='PASSWORD' required)
+                input.button#js_popup_button(type="submit" value="SIGN IN")
                 P
                     span *
-                    |  We`ll contact you as as possible. We don`t reply on monday.
+                    |  You should pass a small check before signing in.
+
+    .wrapper
+        .zone
+            .level.flex
+                .square.First(data-color='green' data-number='1' draggable='true') First
+                .square.Second(data-color='yellow' data-number='2' draggable='true') Second
+                .square.Third(data-color='red' data-number='3' draggable='true') Third
+                .square.Fourth(data-color='purple' data-number='4' draggable='true') Fourth
+                .square.Fifth(data-color='blue' data-number='5' draggable='true') Fifth
+                .square.Sixth(data-color='skyblue' data-number='6' draggable='true') Sixth
+                .square.Seventh(data-color='silver' data-number='7' draggable='true') Seventh
+                .square.Eighth(data-color='gold' data-number='8' draggable='true') Eighth
+            .level.flex
+        .zone
+            .level.flex
+            .level.flex
+
     .welcome
         h1 WELCOME TO STARTUP
         p Your Favourite Creative Agency Template

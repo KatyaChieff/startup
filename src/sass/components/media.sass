@@ -10,8 +10,14 @@
 
   main
 
-    .slider > figure
-      flex: 0 0 33.3%
+    .slider
+      overflow-x: scroll
+
+      &::-webkit-scrollbar-thumb
+        background-color: $white
+
+      & > figure
+        flex: 0 0 33.3%
 
     #clients
       .media
@@ -101,6 +107,7 @@
 
         &.responsive
           transform: translateY(0)
+
         .top_nav
           display: block
           max-height: 80vh

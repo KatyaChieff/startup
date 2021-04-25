@@ -59,12 +59,25 @@ document.body.appendChild(arrowTop)
 // *** MAIN SLIDER WITH DEVELOPERS *** //
 let prev = document.querySelector("#prev_btn"),
     next = document.querySelector("#next_btn"),
+    sliderItem = document.querySelectorAll(".slider_item"),
     slideWidth = document.querySelector(".slider_item").getBoundingClientRect().width,
     slider = document.querySelector(".slider"),
     currentPosition = 0
 
 prev.onclick = scrollPic
 next.onclick = scrollPic
+
+// sliderItem.forEach ((item) => {
+//     item.addEventListener('touchstart', monction)
+// })
+//
+// sliderItem.forEach ((item) => {
+//     item.addEventListener('touchmove', scrollPic)
+// })
+//
+// function monction() {
+//     console.log("monction")
+// }
 
 function scrollPic(event) {
     event.preventDefault()
@@ -233,6 +246,13 @@ localStorage.setItem("visits", ++localStorage.visits)
 let headerBlock = document.querySelector(".welcome"),
     blockWithAlert = document.createElement("p")
 
+blockWithAlert.style.position = "absolute"
+blockWithAlert.style.color = "#dec4a9"
+blockWithAlert.style.top = "0%"
+blockWithAlert.style.left = "10%"
+blockWithAlert.style.right = "10%"
+blockWithAlert.classList.add("withalert")
+
 window.onbeforeunload = () => {
     let date = new Date().toDateString()
     localStorage.setItem('lastVisit', date)
@@ -246,20 +266,11 @@ if (localStorage.lastVisit !== undefined) {
         headerBlock.style.position = "relative"
         headerBlock.appendChild(blockWithAlert)
         blockWithAlert.innerHTML = `Your last visit was on ${lastDate}`
-        blockWithAlert.style.position = "absolute"
-        blockWithAlert.style.color = "#dec4a9"
-        blockWithAlert.style.top = "0%"
-        blockWithAlert.style.left = "10%"
-        blockWithAlert.style.right = "10%"
     }
 } else {
     headerBlock.style.position = "relative"
     headerBlock.appendChild(blockWithAlert)
     blockWithAlert.innerHTML = `It\`s your first time on this site. Welcome!`
-    blockWithAlert.style.position = "absolute"
-    blockWithAlert.style.top = "0%"
-    blockWithAlert.style.left = "10%"
-    blockWithAlert.style.right = "10%"
 }
 
 setTimeout(function removeLastVisit() {
@@ -267,7 +278,9 @@ setTimeout(function removeLastVisit() {
     blockWithAlert.style.transform = "translateX(-30%)"
     blockWithAlert.style.transition = "2s"
     setTimeout(() => {
-        headerBlock.removeChild(blockWithAlert)
+        if (document.querySelector(".withalert")) {
+            headerBlock.removeChild(blockWithAlert)
+        }
     }, 2000)
 }, 3000)
 
@@ -369,3 +382,158 @@ function drag(event) {
         popup.onmouseup = null
     }
 }
+
+// *** DRAG FOR SIGN IN BUTTON *** //
+let popUpButton = document.querySelector("#js_popup_button"),
+    wrapPopUp = document.querySelector(".wrapper"),
+    figures = document.querySelectorAll(".square"),
+    levels = document.querySelectorAll(".level"),
+    welcome = document.querySelector(".welcome h1"),
+    dragObject,
+    dropPoint,
+    dropPoints = [],
+    keys = [[5, 3, 8], [7], [2, 4], [6, 1]]
+
+popUpButton.addEventListener('click', smallCheck)
+
+function smallCheck() {
+    event.preventDefault()
+    let xhr = new XMLHttpRequest(),
+        inputLogin = document.querySelector("#jsNamePopup"),
+        inputPass = document.querySelector("#jsPhonePopup"),
+        params = `login=${inputLogin.value}&pass=${inputPass.value}`
+
+    xhr.open("POST", "php/login.php", true)
+    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded")
+    xhr.send(params)
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState !== 4) return
+        if (xhr.status !== 200) {
+            console.log(xhr.status + "" + xhr.statusText)
+        } else {
+            if (xhr.responseText) {
+                popupClose()
+                wrapPopUp.classList.add("flex")
+                wrapPopUp.style.display = "flex"
+                wrapPopUp.style.backgroundColor = "white"
+                wrapPopUp.style.position = "absolute"
+                wrapPopUp.style.top = "50%"
+                wrapPopUp.style.left = "50%"
+                wrapPopUp.style.zIndex = "1500"
+                wrapPopUp.style.transform = "translate(-50%, -50%)"
+                popupCover.style.position = "fixed"
+                popupCover.style.width = "100vw"
+                popupCover.style.height = "100vh"
+                popupCover.style.backgroundColor = "rgba(0, 0, 0, .8)"
+                popupCover.style.top = "0"
+                popupCover.style.left = "0"
+                popupCover.style.overflow = "hidden"
+                body.appendChild(popupCover)
+            }
+            else alert("go away!")
+        }
+    }
+
+}
+
+figures.forEach((figure) => {
+    figure.style.backgroundColor = figure.getAttribute("data-color")
+    figure.style.cursor = "pointer"
+    figure.insertAdjacentHTML("beforebegin", "<div class='drop_point'></div>")
+    dropPoints.push(figure.previousElementSibling)
+    figure.addEventListener('dragstart', startDrag)
+    figure.addEventListener('dragend', function () {
+        figure.classList.remove("hide")
+    })
+})
+
+dropPoints.forEach((point) => {
+    point.addEventListener('dragenter', function () {
+        event.preventDefault()
+        if (event.target === point) {
+            point.classList.add("drop_point_hover")
+        }
+    })
+    point.addEventListener('dragleave', function () {
+        point.classList.remove("drop_point_hover")
+    })
+    point.addEventListener('drop', function () {
+        point.insertAdjacentElement('beforebegin', dragObject)
+        setTimeout(() => {
+            point.classList.remove("drop_point_hover")
+        }, 0)
+    })
+})
+
+function startDrag() {
+    dragObject = this
+    setTimeout(() => {
+        dragObject.classList.add("hide")
+        dropPoint = dragObject.previousElementSibling
+        dropPoint.classList.add("hide")
+
+    }, 0)
+}
+
+levels.forEach((level) => {
+    level.addEventListener('dragenter', function (event) {
+        event.preventDefault()
+        level.classList.add("dashed")
+
+    })
+    level.addEventListener('dragover', function (event) {
+        event.preventDefault()
+    })
+    level.addEventListener('dragleave', function (event) {
+        level.classList.remove("dashed")
+    })
+    level.addEventListener('drop', function (event) {
+        level.classList.remove("dashed")
+        if (!document.querySelector(".drop_point_hover")) {
+            level.appendChild(dragObject)
+        }
+        dragObject.insertAdjacentElement("beforebegin", dropPoint)
+        dropPoint.classList.remove("hide")
+        checkBandit()
+    })
+})
+
+function checkBandit() {
+    let level0 = levels[0].querySelectorAll(".square"),
+        level1 = levels[1].querySelectorAll(".square"),
+        level2 = levels[2].querySelectorAll(".square"),
+        level3 = levels[3].querySelectorAll(".square"),
+        correct = 0
+    level0.forEach((el, index) => {
+        if (el.getAttribute("data-number") != keys[0][index]) {
+            console.log("wrong")
+            return false
+        } else correct++
+    })
+    level1.forEach((el, index) => {
+        if (el.getAttribute("data-number") != keys[1][index]) {
+            console.log("wrong1")
+            return false
+        } else correct++
+    })
+    level2.forEach((el, index) => {
+        if (el.getAttribute("data-number") != keys[2][index]) {
+            console.log("wrong2")
+            return false
+        } else correct++
+    })
+    level3.forEach((el, index) => {
+        if (el.getAttribute("data-number") != keys[3][index]) {
+            console.log("wrong3")
+            return false
+        } else correct++
+    })
+    if (correct === figures.length) {
+        welcome.innerText = "WELCOME KATYA!"
+        wrapPopUp.classList.remove("flex")
+        wrapPopUp.style.display = "none"
+        body.removeChild(popupCover)
+    }
+}
+
+
